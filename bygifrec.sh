@@ -41,12 +41,13 @@ eval $(xdotool getmouselocation --shell)
 
 if [ $RX -gt $X ] || [ $RY -gt $Y ]; then
 	>&2 echo -e "${ERRCOLOR}>>> ERROR: La geometría del marco especificado no es válido.\033[0m"
+else
+	RWIDTH=$(( $X - $RX+1 ))
+	RHEIGHT=$(( $Y - $RY+1 ))
+
+	# Starting to take the screencast.
+	echo -ne "En 5 segundos se comenzará a grabar el GIF de ${RWIDTH}x${RHEIGHT} y se guardará en la ubicación actual.\033[0m"
+	byzanz-record -c --delay=5 -x $RX -y $RY -w $RWIDTH -h $RHEIGHT -d $DURATION $RECPATH
+
+	echo -e "\n${OKCOLOR}>>> Grabación realizada con éxito. Guardado en: $RECPATH\033[0m\n"
 fi
-RWIDTH=$(( $X - $RX+1 ))
-RHEIGHT=$(( $Y - $RY+1 ))
-
-# Starting to take the screencast.
-echo -ne "En 5 segundos se comenzará a grabar el GIF de ${RWIDTH}x${RHEIGHT} y se guardará en la ubicación actual.\033[0m"
-byzanz-record -c --delay=5 -x $RX -y $RY -w $RWIDTH -h $RHEIGHT -d $DURATION $RECPATH
-
-echo -e "\n${OKCOLOR}>>> Grabación realizada con éxito. Guardado en: $RECPATH\033[0m\n"
