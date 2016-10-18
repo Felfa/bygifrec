@@ -1,5 +1,5 @@
 #!/bin/bash
-# A simple GIF recorder using byzanz.
+# A simple GIF recorder using byzanz. See README.md for more.
 
 # Declaring and initializing duration variable as integer.
 declare -i DURATION=0
