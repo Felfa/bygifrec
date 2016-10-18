@@ -14,7 +14,7 @@ RECPATH="recording.gif"
 
 # Asking for the recording duration.
 until [ $DURATION -gt 0 ]; do
-	echo -n "¿Qué duración tendrá el GIF?: "
+	echo -n "¿Qué duración tendrá el GIF (en segundos)?: "
 	read DURATION
 
 	if [ $DURATION -lt 1 ]; then
@@ -24,7 +24,7 @@ done
 echo -e "${OKCOLOR}>>> La duración será de $DURATION segundos.\033[0m"
 
 # Asking for recording coordinates.
-read -p "A continuación se tomarán las coordenadas de grabación. Primero sitúa el cursor del ratón sobre la esquina superior izquierda del marco donde se tomará la captura y cuando estés listo, pulsa <Intro>. "
+read -p "A continuación se tomarán las coordenadas de grabación. Primero sitúa el cursor del ratón sobre la esquina superior izquierda del rectángulo donde se tomará la captura y cuando estés listo, pulsa <Intro>. "
 sleep 1
 
 # Take upper-left corner absolute coordinates.
@@ -45,6 +45,7 @@ fi
 RWIDTH=$(( $X - $RX+1 ))
 RHEIGHT=$(( $Y - $RY+1 ))
 
+# Starting to take the screencast.
 echo -ne "En 5 segundos se comenzará a grabar el GIF de ${RWIDTH}x${RHEIGHT} y se guardará en la ubicación actual.\033[0m"
 byzanz-record -c --delay=5 -x $RX -y $RY -w $RWIDTH -h $RHEIGHT -d $DURATION $RECPATH
 
